@@ -1,0 +1,42 @@
+
+body{
+	font-family:verdana;
+	text-align:center;
+	background-color:#ddd;
+}
+
+#frame{
+	margin:0 auto;
+	padding:50px 0px;
+	text-align:left;
+	width:900px;
+	border:1px solid grey;
+	background-color:white;
+}
+
+#statusBar{
+	width:800px;
+	margin-left:50px;
+	height:40px;
+	border:1px solid black;
+}
+
+
+#hudBar{
+	width:800px;
+	height:40px;
+	margin-left:50px;
+	border:1px solid black;
+}
+
+#game{
+	margin-left:50px;
+	border:1px solid black;
+	background-image:url(public/images/floor.jpg);
+	
+}
+
+#imageHolder{
+	display:none;
+	
+}

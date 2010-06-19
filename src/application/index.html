@@ -1,0 +1,115 @@
+<html>
+<head>
+	<title>Signal :: Welcome to Signal!</title>
+
+	<link rel="stylesheet" href="public/css/style.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+	
+	<script type="text/javascript" charset="utf-8" src="public/js/library/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript">
+		var canvas;
+		var ctx;
+		var obstacle;
+		var player;
+		var enemy;
+		var world;
+		
+		var floor = new Image();
+		floor.src = 'public/images/floor.jpg';  
+	
+	</script>
+	<script type="text/javascript" charset="utf-8" src="public/js/Enemy.js"></script>
+	<script type="text/javascript" charset="utf-8" src="public/js/Obstacle.js"></script>
+	<script type="text/javascript" charset="utf-8" src="public/js/Player.js"></script>
+	<script type="text/javascript" charset="utf-8" src="public/js/Shield.js"></script>
+	<script type="text/javascript" charset="utf-8" src="public/js/Physics.js"></script>
+	<script type="text/javascript" charset="utf-8" src="public/js/Weapon.js"></script>
+	<script type="text/javascript" charset="utf-8" src="public/js/World.js"></script>
+	<script type="text/javascript" charset="utf-8" src="public/js/Controller.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			canvas = document.getElementById("game");
+			ctx = canvas.getContext("2d");
+			
+			player = new Player(200,200,100,20);
+			enemy = new Enemy(300,100,100,20);
+			world = new World();
+			
+			//outer walls
+			obstacle = new Obstacle(-20,-20,20,840,2);
+			world.AddObject(obstacle,"static");
+			obstacle = new Obstacle(-20,480,20,840,2);
+			world.AddObject(obstacle,"static");
+			
+			obstacle = new Obstacle(-20,-20,520,20,2);
+			world.AddObject(obstacle,"static");
+			obstacle = new Obstacle(800,-20,520,20,2);
+			world.AddObject(obstacle,"static");
+			
+			//inner walls
+			obstacle = new Obstacle(100,0,150,20,2);
+			world.AddObject(obstacle,"static");
+			obstacle = new Obstacle(500,0,150,20,2);
+			world.AddObject(obstacle,"static");
+			
+			obstacle = new Obstacle(100,150,20,150,2);
+			world.AddObject(obstacle,"static");
+			obstacle = new Obstacle(370,150,20,150,2);
+			world.AddObject(obstacle,"static");
+			
+			obstacle = new Obstacle(0,300,20,150,2);
+			world.AddObject(obstacle,"static");
+			obstacle = new Obstacle(150,300,100,20,2);
+			world.AddObject(obstacle,"static");
+			
+			
+			obstacle = new Obstacle(600,300,300,20,2);
+			world.AddObject(obstacle,"static");
+			
+			obstacle = new Obstacle(740,340,20,60,2);
+			world.AddObject(obstacle,"static");
+
+			
+			world.AddObject(player,"moving");
+			world.AddObject(enemy,"moving");
+			
+			setInterval("DrawWorld()",33);
+			
+			initController();
+			
+		});
+		
+		function DrawWorld(){
+			ctx.clearRect(0,0,800,480); // clear canvas  
+			
+			ctx.drawImage(floor,0,0);
+			ctx.drawImage(floor,375,0);
+			ctx.drawImage(floor,750,0);
+			ctx.drawImage(floor,0,375);
+			ctx.drawImage(floor,375,375);
+			ctx.drawImage(floor,750,375);
+	
+			
+			player.Update();
+			world.Update();
+			
+			world.Draw();
+		}
+	
+	</script>
+	
+</head>
+<body>
+<div id="frame">
+
+	<div id="imageHolder"></div>
+	
+	<div id="statusBar">Status Bar</div>
+	<div id="gameFrame">
+		<canvas id="game" width="800px" height="480px"></canvas>
+	</div>
+	<div id="hudBar">Hud Bar</div>
+
+</div>
+</body>
+</html>
